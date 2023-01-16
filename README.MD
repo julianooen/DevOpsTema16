@@ -1,4 +1,4 @@
-Tema 16 - 
+Tema 16 - Stress Test Chaos
 
 * Requisitos:
 	- Docker
