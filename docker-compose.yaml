@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  calc:
+    build:
+      context: .
+    container_name: "calculator"
+    ports:
+      - "8090:8080"
+    networks:
+      - net_calc
+
+networks:
+  net_calc:

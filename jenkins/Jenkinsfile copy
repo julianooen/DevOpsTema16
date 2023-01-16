@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git clone') {
+            steps {
+                // Get some code from a GitHub repository
+                git branch: 'master', url: 'https://github.com/julianooen/DevOpsTema16.git'
+            }
+        }
+        stage('Run Docker-compose') {
+            steps {
+                // Run docker-compose.
+                sh "docker-compose up -d"
+            }
+        }
+        stage('Test') {
+            steps{
+                dir('gatling'){
+                    sh './gradlew gatlingRun -Dport=8090'
+                }
+            }
+            post{
+                always{
+                    gatlingArchive()
+                }
+            }
+        }
+    }
+}
